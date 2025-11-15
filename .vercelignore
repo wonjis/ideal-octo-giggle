@@ -1,0 +1,51 @@
+# Dependencies
+node_modules
+frontend/node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Development
+.git
+.github
+.vscode
+.idea
+*.log
+*.swp
+*.swo
+
+# Documentation (not needed for deployment)
+prd.md
+design-system.md
+MVP-IMPLEMENTATION-PLAN.md
+designfile
+
+# Testing
+coverage
+.nyc_output
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__
+__mocks__
+
+# Build artifacts (will be rebuilt)
+frontend/build
+dist
+.cache
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+.Rhistory
