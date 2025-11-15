@@ -565,6 +565,9 @@ ideal-octo-giggle/
 ├── .env.local                   # Your actual API keys ❌ NEVER COMMIT
 ├── .gitignore                   # Git ignore rules ✅ COMMIT
 │
+├── .github/                     # GitHub configuration ✅ COMMIT
+│   └── pull_request_template.md # Auto-populated PR template
+│
 ├── frontend/                    # React Frontend Application
 │   ├── public/
 │   │   ├── index.html
@@ -1149,34 +1152,194 @@ Sentry.init({
 
 ## 🤝 Contributing
 
-### Development Workflow
+### 🚨 Golden Rules (READ THIS FIRST)
 
-1. **Create Feature Branch:**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+1. **❌ NEVER commit directly to `main` branch**
+2. **✅ ALWAYS create a pull request for every change**
+3. **📅 Create a PR at the end of EVERY work day** (even if incomplete - use Draft PR)
+4. **🔒 NEVER commit `.env.local` or API keys**
+5. **✅ ALWAYS test locally before pushing** (`npm test` && `npm run build`)
 
-2. **Make Changes:**
-   - Follow component structure in `design-system.md`
-   - Write tests for new features
-   - Update documentation
+---
 
-3. **Test Locally:**
-   ```bash
-   vercel dev  # Test with serverless functions
-   ```
+### Development Workflow & PR Requirements
 
-4. **Commit:**
-   ```bash
-   git add .
-   git commit -m "feat: add image upload component"
-   ```
+**⚠️ IMPORTANT: Regular Pull Requests Required**
 
-5. **Push and Auto-Deploy:**
-   ```bash
-   git push origin feature/your-feature-name
-   # Vercel automatically creates preview deployment
-   ```
+To maintain code quality and track progress, you **must** create pull requests regularly:
+
+- **Daily PRs:** Create a PR at the end of each work session
+- **Feature PRs:** One PR per feature or significant change
+- **Small PRs:** Keep PRs focused (< 500 lines of code when possible)
+- **Never direct push to main:** All changes must go through PR review
+
+**Why Daily PRs Matter:**
+- 📊 Tracks your daily progress
+- 🔄 Acts as backup of your work
+- 👥 Keeps team informed
+- 🐛 Easier to identify when bugs were introduced
+- 📝 Documents decision-making process
+
+### Visual Workflow
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     DAILY DEVELOPMENT CYCLE                      │
+└─────────────────────────────────────────────────────────────────┘
+
+  Start of Day                                          End of Day
+       │                                                     │
+       ├─ git checkout main                                 │
+       ├─ git pull origin main                              │
+       ├─ git checkout -b feature/new-feature               │
+       │                                                     │
+       ├─ [Work on feature]                                 │
+       ├─ [Make commits frequently]                         │
+       ├─ git commit -m "feat: ..."                        │
+       │                                                     │
+       ├─ npm test          ◄──── BEFORE PUSHING            │
+       ├─ npm run build     ◄──── VERIFY BUILDS             │
+       │                                                     │
+       ├─ git push origin feature/new-feature               │
+       ├─ Create PR on GitHub                               │
+       ├─ Mark as "Draft" if WIP                           │
+       │                                                     │
+       └─ Update PR with daily notes ──────────────────────►┘
+
+  Next Day: Continue on same branch OR merge & start new feature
+```
+
+### PR Workflow (Required)
+
+#### 1. Create Feature Branch
+```bash
+# Always branch from latest main
+git checkout main
+git pull origin main
+git checkout -b feature/your-feature-name
+
+# Branch naming conventions:
+# - feature/add-file-upload
+# - fix/supabase-connection-error
+# - docs/update-readme
+# - refactor/component-structure
+```
+
+#### 2. Make Changes
+- Follow component structure in `design-system.md`
+- Write tests for new features
+- Update documentation
+- Keep commits focused and descriptive
+
+#### 3. Commit Regularly
+```bash
+# Make frequent, small commits
+git add .
+git commit -m "feat: add file upload component"
+
+# Use conventional commit messages:
+# - feat: new feature
+# - fix: bug fix
+# - docs: documentation changes
+# - refactor: code refactoring
+# - test: adding tests
+# - style: formatting changes
+```
+
+#### 4. Test Locally Before Pushing
+```bash
+# Test with serverless functions
+vercel dev
+
+# Run tests
+npm test
+
+# Build to check for errors
+npm run build
+```
+
+#### 5. Push and Create PR
+```bash
+# Push your branch
+git push origin feature/your-feature-name
+
+# Create PR on GitHub
+# Go to: https://github.com/YOUR_USERNAME/ideal-octo-giggle/pulls
+# Click "New Pull Request"
+```
+
+#### 6. PR Requirements Checklist
+
+Before creating a PR, ensure:
+
+```markdown
+## PR Checklist
+
+- [ ] Code follows design system guidelines
+- [ ] All tests pass (`npm test`)
+- [ ] Build succeeds (`npm run build`)
+- [ ] No console errors or warnings
+- [ ] Environment variables documented in `.env.example`
+- [ ] README updated if needed
+- [ ] No sensitive data (API keys) in code
+- [ ] Commit messages follow conventional commits
+- [ ] PR description explains what and why
+```
+
+#### 7. PR Template
+
+**Automatic PR Template:**
+
+When you create a new PR on GitHub, a template will automatically populate with the required sections. This template is located at `.github/pull_request_template.md`.
+
+**The template includes:**
+- Description section
+- Type of change checkboxes
+- Changes made list
+- Testing checklist (local, tests, build, Vercel preview)
+- Code quality checklist (design system, TypeScript, no API keys)
+- Screenshots/video section
+- Related issues links
+- Deployment notes
+
+**Simply fill in each section before submitting your PR.**
+
+### PR Review Process
+
+1. **Self-Review First:** Review your own PR before requesting review
+2. **Vercel Preview:** Test the Vercel preview deployment link
+3. **Wait for CI:** Ensure all checks pass (tests, build)
+4. **Request Review:** Tag team members for review
+5. **Address Feedback:** Make requested changes
+6. **Merge:** Squash and merge when approved
+
+### Daily Development Routine
+
+**End of Each Day:**
+```bash
+# 1. Commit all work
+git add .
+git commit -m "feat: implement feature X (WIP)"
+
+# 2. Push to remote
+git push origin feature/your-feature
+
+# 3. Create PR (even if not complete)
+# Mark as "Draft" if work in progress
+
+# 4. Update PR description with:
+#    - What was completed today
+#    - What's remaining
+#    - Any blockers
+```
+
+**Benefits of Daily PRs:**
+- ✅ Track progress over time
+- ✅ Easy to roll back if needed
+- ✅ Team visibility on what's being worked on
+- ✅ Continuous integration testing
+- ✅ Prevents large, difficult-to-review PRs
+- ✅ Acts as daily backup of work
 
 ### Code Style
 
@@ -1184,6 +1347,7 @@ Sentry.init({
 - **Components:** Functional components with hooks
 - **Styling:** Tailwind utility classes + CSS Modules for complex styles
 - **Naming:** PascalCase for components, camelCase for functions/variables
+- **File Structure:** Follow atomic design pattern (atoms/molecules/organisms)
 
 ---
 
@@ -1369,16 +1533,69 @@ MIT License - see LICENSE file for details
 
 ## 📋 Quick Reference
 
+### Daily Checklist
+
+**Every Day Before You Stop Working:**
+```bash
+# 1. Run tests
+npm test
+
+# 2. Build check
+npm run build
+
+# 3. Commit work
+git add .
+git commit -m "feat: your changes"
+
+# 4. Push
+git push origin your-branch-name
+
+# 5. Create/Update PR (even if Draft)
+# Go to GitHub and create PR
+
+# 6. Update PR description
+# - What you completed
+# - What's remaining
+# - Any blockers
+```
+
 ### Files You MUST Keep Secret
-- `.env.local` - Your actual API keys
-- `.env` - Alternative local env file
-- Any file with API keys or passwords
+- `.env.local` - Your actual API keys ❌ NEVER COMMIT
+- `.env` - Alternative local env file ❌ NEVER COMMIT
+- Any file with API keys or passwords ❌ NEVER COMMIT
 
 ### Files Safe to Commit
-- `.env.example` - Template with no real keys
-- `.gitignore` - Protects sensitive files
-- All source code (*.tsx, *.ts, *.css)
-- README, PRD, design docs
+- `.env.example` - Template with no real keys ✅ COMMIT
+- `.gitignore` - Protects sensitive files ✅ COMMIT
+- `.github/pull_request_template.md` - PR template ✅ COMMIT
+- All source code (*.tsx, *.ts, *.css) ✅ COMMIT
+- README, PRD, design docs ✅ COMMIT
+
+### Git Commands Quick Reference
+```bash
+# Start new feature
+git checkout main
+git pull origin main
+git checkout -b feature/feature-name
+
+# During development
+git add .
+git commit -m "feat: description"
+
+# Before pushing
+npm test
+npm run build
+
+# Push and PR
+git push origin feature/feature-name
+# Then create PR on GitHub
+
+# Update branch with latest main
+git checkout main
+git pull origin main
+git checkout feature/feature-name
+git merge main
+```
 
 ### Environment Variables Checklist
 ```bash
