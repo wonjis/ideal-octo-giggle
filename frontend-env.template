@@ -1,0 +1,13 @@
+# Frontend Environment Variables
+# Copy this to frontend/.env.local after React app is created
+
+# Supabase Configuration (optional for MVP)
+REACT_APP_SUPABASE_URL=https://your-project.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=your-anon-key
+
+# API Configuration
+REACT_APP_API_URL=/api
+
+# Application Configuration
+REACT_APP_MAX_FILE_SIZE=10485760
+REACT_APP_MAX_PROMPT_LENGTH=500
